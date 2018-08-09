@@ -2,12 +2,6 @@ const socket = io();
 
 socket.on('connect', function () {
     console.log(`Connected to server`);
-
-    socket.emit('createMessage', {
-        from: `thatDevOp`,
-        text: `I am a Jihad`
-    });
-    
 });
 
 socket.on('disconnect', function () {
