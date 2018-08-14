@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log(`User was disconnected`);
+        socket.broadcast.emit(`newMessage`, generateMessage(`Admin`, `A user has left the session!`));
     });
 });
 
