@@ -22,14 +22,17 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log(`New user connected`);
 
-    socket.emit(`newMessage`, generateMessage(`Admin`, `Welcome to the chat app!`));
-
-    socket.broadcast.emit(`newMessage`, generateMessage(`Admin`, `A new user has joined the session!`));
-
     socket.on(`join`, (params, callback) => {
         if (!isRealString(params.name) || !isRealString(params.room)) {
             callback(`Proper name and room name are required`);
         }
+
+        socket.join(params.room);
+        // socket.leave(params.room); how you leave a room.
+        
+        socket.emit(`newMessage`, generateMessage(`Admin`, `Welcome to the chat app!`));
+
+        socket.broadcast.to(params.room).emit(`newMessage`, generateMessage(`Admin`, `${params.name} has joined the room!`));
 
         callback();
     });
