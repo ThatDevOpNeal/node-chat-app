@@ -18,7 +18,6 @@ function scrollToBottom () {
 };
 
 socket.on('connect', function () {
-    console.log(`Connected to server`);
     var params = jQuery.deparam(window.location.search);
     params.room = params.room.toLowerCase();
 
@@ -34,7 +33,6 @@ socket.on('connect', function () {
 });
 
 socket.on('disconnect', function () {
-    console.log(`Disconnected from server`);
 });
 
 socket.on(`updateUserList`, function (users) {
