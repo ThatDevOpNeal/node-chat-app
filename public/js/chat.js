@@ -20,7 +20,6 @@ function scrollToBottom () {
 socket.on('connect', function () {
     console.log(`Connected to server`);
     var params = jQuery.deparam(window.location.search);
-    console.log(params);
 
     socket.emit(`join`, params, function (err) {
         if (err) {
@@ -79,7 +78,6 @@ jQuery(`#message-form`).on(`submit`, function (e) {
     const messageTextBox = jQuery(`[name=message]`);
 
     socket.emit(`createMessage`, {
-        from: `User`,
         text: messageTextBox.val()
     }, function () {
         messageTextBox.val(``);
